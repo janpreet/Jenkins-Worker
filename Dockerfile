@@ -12,7 +12,8 @@ RUN apt-get install -y \
     git \
     wget \
     openssh-server \
-    openjdk-8-jdk
+    openjdk-8-jdk \
+    maven
 
 RUN /usr/bin/ssh-keygen -A
 
@@ -20,11 +21,19 @@ ADD ./sshd_config /etc/ssh/sshd_config
 
 RUN useradd jenkins -m -s /bin/bash
 
-RUN echo root:jenkins | chpasswd
+RUN echo jenkins:jenkins | chpasswd
 
 RUN echo "jenkins  ALL=(ALL)  ALL" >> etc/sudoers
 
 RUN mkdir -p /var/run/sshd
+RUN mkdir /home/jenkins/.m2
+
+RUN chown -R jenkins:jenkins /home/jenkins/.m2/ 
+
+ENV HELM_VERSION="v3.4.0"
+
+RUN wget -q https://get.helm.sh/helm-${HELM_VERSION}-linux-amd64.tar.gz -O - | tar -xzO linux-amd64/helm > /usr/local/bin/helm 
+RUN chmod +x /usr/local/bin/helm 
 
 EXPOSE 22
 CMD ["/usr/sbin/sshd", "-D"]
