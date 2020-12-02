@@ -35,5 +35,10 @@ ENV HELM_VERSION="v3.4.0"
 RUN wget -q https://get.helm.sh/helm-${HELM_VERSION}-linux-amd64.tar.gz -O - | tar -xzO linux-amd64/helm > /usr/local/bin/helm 
 RUN chmod +x /usr/local/bin/helm 
 
+RUN wget -q https://download.docker.com/linux/static/stable/x86_64/docker-17.03.2-ce.tgz \
+  && tar xzvf docker-17.03.2-ce.tgz \
+  && mv docker/docker /usr/local/bin \
+  && rm -r docker docker-17.03.2-ce.tgz
+
 EXPOSE 22
 CMD ["/usr/sbin/sshd", "-D"]
