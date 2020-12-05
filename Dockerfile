@@ -11,6 +11,7 @@ RUN apt-get update -y && \
 RUN apt-get install -y \
     git \
     wget \
+    curl \
     openssh-server \
     openjdk-8-jdk \
     maven
@@ -34,6 +35,10 @@ ENV HELM_VERSION="v3.4.0"
 
 RUN wget -q https://get.helm.sh/helm-${HELM_VERSION}-linux-amd64.tar.gz -O - | tar -xzO linux-amd64/helm > /usr/local/bin/helm 
 RUN chmod +x /usr/local/bin/helm 
+
+RUN curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
+RUN chmod +x ./kubectl
+RUN mv ./kubectl /usr/local/bin
 
 EXPOSE 22
 CMD ["/usr/sbin/sshd", "-D"]
