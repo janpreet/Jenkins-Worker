@@ -1,4 +1,4 @@
-FROM ubuntu
+FROM ubuntu:rolling
 LABEL Maintainer="Janpreet Singh"
 
 ARG DEBIAN_FRONTEND=noninteractive
