@@ -1,4 +1,4 @@
-FROM ubuntu
+FROM ubuntu:20.10
 LABEL Maintainer="Janpreet Singh"
 
 ARG DEBIAN_FRONTEND=noninteractive
