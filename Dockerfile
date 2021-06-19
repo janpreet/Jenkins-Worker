@@ -1,4 +1,4 @@
-FROM ubuntu
+FROM ubuntu:groovy-20210614
 LABEL Maintainer="Janpreet Singh"
 
 ARG DEBIAN_FRONTEND=noninteractive
