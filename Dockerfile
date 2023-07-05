@@ -1,4 +1,4 @@
-FROM ubuntu
+FROM ubuntu:kinetic
 LABEL Maintainer="Janpreet Singh"
 
 ARG DEBIAN_FRONTEND=noninteractive
